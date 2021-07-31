@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/voxxy/code/realGhostFoxx/TaxiFareModel/mlruns/1/03f78b42108e4466943e6578f3b0466a/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 03f78b42108e4466943e6578f3b0466a
+run_uuid: 03f78b42108e4466943e6578f3b0466a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1627742971502
+status: 1
+tags: []
+user_id: unknown

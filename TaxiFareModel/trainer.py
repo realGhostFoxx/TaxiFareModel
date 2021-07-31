@@ -9,6 +9,9 @@ from TaxiFareModel.utils import compute_rmse
 from TaxiFareModel.encoders import TimeFeaturesEncoder, DistanceTransformer
 from TaxiFareModel.data import get_data, clean_data
 
+import mlflow
+from mlflow.tracking import MlflowClient
+
 class Trainer():
     def __init__(self, X, y):
         """
@@ -49,8 +52,29 @@ class Trainer():
         rmse = compute_rmse(y_pred, y_test)
         print(rmse)
         return rmse
+    
+    @memoized_property
+    def mlflow_client(self):
+        mlflow.set_tracking_uri(MLFLOW_URI)
+        return MlflowClient()
 
+    @memoized_property
+    def mlflow_experiment_id(self):
+        try:
+            return self.mlflow_client.create_experiment(self.experiment_name)
+        except BaseException:
+            return self.mlflow_client.get_experiment_by_name(self.experiment_name).experiment_id
 
+    @memoized_property
+    def mlflow_run(self):
+        return self.mlflow_client.create_run(self.mlflow_experiment_id)
+
+    def mlflow_log_param(self, key, value):
+        self.mlflow_client.log_param(self.mlflow_run.info.run_id, key, value)
+
+    def mlflow_log_metric(self, key, value):
+        self.mlflow_client.log_metric(self.mlflow_run.info.run_id, key, value)
+    
 if __name__ == "__main__":
     # get data
     df = get_data(df)
