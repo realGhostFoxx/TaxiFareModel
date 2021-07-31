@@ -1,10 +1,8 @@
 # Data analysis
 - Document here the project: TaxiFareModel
 - Description: Project Description
-- Data Source:
-- Type of analysis:
-
-Please document the project the better you can.
+- Data Source: KAGGLE Data
+- Type of analysis: Linear Regression Model
 
 # Startup the project
 
